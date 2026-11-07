@@ -28,8 +28,6 @@ a{color:var(--wine)}
 h1,h2,h3{font-family:var(--serif);margin:0;line-height:1.15}
 .eyebrow{font-weight:700;color:var(--wine);letter-spacing:.02em;font-size:15px}
 
-/* ---------- Snow layer (outside) ---------- */
-#snow{position:fixed;inset:0;pointer-events:none;z-index:0}
 main,header,footer{position:relative;z-index:1}
 
 /* ---------- Hero ---------- */
@@ -155,12 +153,10 @@ footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:15px}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
-  #snow{display:none}
 }
 </style>
 </head>
 <body>
-<canvas id="snow" aria-hidden="true"></canvas>
 
 <main>
   <header class="hero">
@@ -192,7 +188,7 @@ footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:15px}
 
   <section id="how">
     <div class="wrap">
-      <div class="sec-head reveal"><div><h2>איך זה עובד</h2><p>שלושה צעדים, וערב אחד חם.</p></div></div>
+      <div class="sec-head reveal"><div><h2>איך זה עובד</h2><p>שלושה צעדים, וערב חם אחד.</p></div></div>
       <div class="steps">
         <div class="step reveal"><div class="n">1</div><h3>בוחרות בית</h3><p>לכל בית סדנה וארוחת ערב משלו.</p></div>
         <div class="step reveal"><div class="n">2</div><h3>נרשמות</h3><p>עד 15 נרשמות בכל בית, אז כדאי למהר.</p></div>
@@ -377,29 +373,40 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 // city window lights
 (() => { const L = $('#lights'); for (let i = 0; i < 22; i++) { const s = document.createElement('i'); s.style.right = (4 + Math.random() * 92) + '%'; s.style.bottom = (8 + Math.random() * 55) + '%'; s.style.animationDelay = (-Math.random() * 4) + 's'; L.appendChild(s); } })();
 
-// snow: gentle in page margins, fuller inside the window
-function snow(canvas, density, maxR, speed, color){
+// rain on the window: falling streaks outside + drops sliding down the glass
+function rain(canvas){
   if (reduce) return;
-  const ctx = canvas.getContext('2d'); let W, H, flakes = [];
+  const ctx = canvas.getContext('2d'); let W, H, streaks = [], drops = [];
   const dpr = Math.min(devicePixelRatio || 1, 2);
   function size(){ const r = canvas.getBoundingClientRect(); W = r.width; H = r.height; canvas.width = W * dpr; canvas.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.round(W * H * density); flakes = Array.from({ length: n }, () => mk(true)); }
-  function mk(any){ return { x: Math.random() * W, y: any ? Math.random() * H : -6, r: .6 + Math.random() * maxR, v: (.3 + Math.random() * .7) * speed, d: Math.random() * 6.28 }; }
-  function tick(){ ctx.clearRect(0, 0, W, H); ctx.fillStyle = color;
-    for (const f of flakes){ f.y += f.v; f.d += .01; f.x += Math.sin(f.d) * .35; if (f.y > H + 6) Object.assign(f, mk(false));
-      ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.28); ctx.fill(); }
+    streaks = Array.from({ length: Math.round(W * H * 0.0011) }, () => mkS(true));
+    drops = Array.from({ length: Math.round(W * H * 0.00012) }, () => mkD(true)); }
+  function mkS(any){ return { x: Math.random() * (W + 40), y: any ? Math.random() * H : -20, l: 10 + Math.random() * 14, v: 7 + Math.random() * 5, a: .18 + Math.random() * .3 }; }
+  function mkD(any){ return { x: Math.random() * W, y: any ? Math.random() * H : -8, r: 1.6 + Math.random() * 2.6, v: 0, wait: Math.random() * 240 }; }
+  function tick(){
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineCap = 'round'; ctx.lineWidth = 1.1;
+    for (const s of streaks){ s.y += s.v; s.x -= s.v * .18; if (s.y > H + 20) Object.assign(s, mkS(false));
+      ctx.strokeStyle = `rgba(210,225,240,${s.a})`; ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(s.x + s.l * .18, s.y - s.l); ctx.stroke(); }
+    for (const d of drops){
+      if (d.wait > 0) d.wait--; else { d.v = Math.min(d.v + .02, 1.6); d.y += d.v; }
+      if (d.y > H + 8) Object.assign(d, mkD(false));
+      const g = ctx.createRadialGradient(d.x - d.r * .3, d.y - d.r * .3, 0, d.x, d.y, d.r);
+      g.addColorStop(0, 'rgba(255,255,255,.75)'); g.addColorStop(1, 'rgba(200,220,240,.12)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(d.x, d.y, d.r * .85, d.r, 0, 0, 6.28); ctx.fill();
+      if (d.v > .3){ ctx.strokeStyle = 'rgba(220,235,250,.18)'; ctx.lineWidth = d.r * .9; ctx.beginPath(); ctx.moveTo(d.x, d.y - d.r); ctx.lineTo(d.x, d.y - d.r - 16); ctx.stroke(); ctx.lineWidth = 1.1; }
+    }
     requestAnimationFrame(tick); }
   addEventListener('resize', size); size(); tick();
 }
-snow($('#winSnow'), 0.0016, 2.2, 1, 'rgba(255,255,255,.9)');
-snow($('#snow'), 0.00006, 1.8, .55, 'rgba(95,134,163,.35)');
+rain($('#winSnow'));
 
 // small celebration on success
 function burst(){
   if (reduce) return;
   const box = $('#thanks'); const r = box.getBoundingClientRect();
   for (let i = 0; i < 26; i++){
-    const s = document.createElement('span'); s.textContent = Math.random() < .5 ? '❄' : '♥';
+    const s = document.createElement('span'); s.textContent = Math.random() < .6 ? '♥' : '✦';
     Object.assign(s.style, { position: 'fixed', left: (r.left + r.width / 2) + 'px', top: (r.top + 40) + 'px', color: Math.random() < .5 ? '#8c2f3a' : '#5f86a3', fontSize: (12 + Math.random() * 14) + 'px', pointerEvents: 'none', zIndex: 9, transition: 'transform 1.4s cubic-bezier(.2,.8,.2,1), opacity 1.4s' });
     document.body.appendChild(s);
     requestAnimationFrame(() => { s.style.transform = `translate(${(Math.random() - .5) * 320}px, ${-60 - Math.random() * 180}px) rotate(${Math.random() * 360}deg)`; s.style.opacity = '0'; });
