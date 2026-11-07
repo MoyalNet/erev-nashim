@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ערב נשים בבתים · 16.11</title>
-<meta name="description" content="ערב נשים בחמישה בתים בתל אביב – סדנה מיוחדת וארוחת ערב. שני, ו׳ כסלו, 16.11, 19:58. עד 15 נרשמות בכל בית.">
-<meta property="og:title" content="ערב נשים בבתים · 16.11 · 19:58">
-<meta property="og:description" content="כשמתחיל להתקרר בתל אביב, אצלנו מתבשל משהו חם ♥ חמישה בתים, עד 15 נרשמות בכל בית.">
+<title>ערב נשים · כסלו תשפ״ז</title>
+<meta name="description" content="משהו חם מתבשל פה! ערב אחד של 5 בתים מארחים, 5 סדנאות שוות וקהילה אחת של נשות מעלה אליהו. שני, ו׳ כסלו, 16.11, 19:58.">
+<meta property="og:title" content="ערב נשים כסלו תשפ״ז · משהו חם מתבשל פה!">
+<meta property="og:description" content="ערב אחד של 5 בתים מארחים. 5 סדנאות שוות וקהילה אחת של נשות מעלה אליהו. לך נשאר רק לבחור!">
 <meta property="og:image" content="img/pot.webp">
 <meta name="theme-color" content="#f8efe4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,14 +64,14 @@ main,header,footer{position:relative;z-index:1}
 .window .lights i{position:absolute;width:5px;height:6px;background:#ffd38a;border-radius:1px;animation:glow 4s ease-in-out infinite;box-shadow:0 0 6px #ffb84d}
 .win-wrap{position:relative;padding-bottom:16%}
 .ledge{position:absolute;left:-6%;right:-6%;bottom:11%;height:16px;border-radius:10px;background:linear-gradient(#fffaf3,#efe0cf);box-shadow:0 10px 20px -12px rgba(58,31,31,.4);z-index:2}
-.pot{position:absolute;z-index:3;left:-2%;bottom:3%;width:50%;aspect-ratio:640/560;animation:simmer 3.2s ease-in-out infinite;transform-origin:50% 100%}
-.pot img{position:absolute;inset:0;width:100%;height:100%}
-.pot .lid{animation:lid 5.5s ease-in-out infinite;transform-origin:34% 42%}
-.pot .shadow{position:absolute;left:18%;right:22%;bottom:4%;height:8%;border-radius:50%;background:radial-gradient(closest-side,rgba(58,31,31,.28),transparent);z-index:-1}
-.puff{position:absolute;z-index:4;left:20%;top:-6%;width:30%;height:40%;pointer-events:none}
-.puff span{position:absolute;bottom:0;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.9);filter:blur(8px);opacity:0;animation:puff 5.5s ease-out infinite}
-.puff span:nth-child(1){left:10%}.puff span:nth-child(2){left:40%;animation-delay:.08s}.puff span:nth-child(3){left:65%;animation-delay:.16s}
-.steam{position:absolute;z-index:4;left:22%;top:4%;width:30%;height:40%;pointer-events:none}
+.pot{position:absolute;z-index:3;left:2%;bottom:5%;width:42%;aspect-ratio:640/474;animation:simmer 3.2s ease-in-out infinite;transform-origin:50% 100%}
+.pot .body{position:absolute;inset:0;width:100%;height:100%}
+.pot .lid{position:absolute;width:79%;left:11.5%;top:-21%;animation:lid 6s cubic-bezier(.3,.7,.4,1) infinite;transform-origin:50% 90%;z-index:2}
+.pot .shadow{position:absolute;left:10%;right:10%;bottom:-3%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(58,31,31,.32),transparent);z-index:-1}
+.puff{position:absolute;z-index:1;left:25%;top:-8%;width:50%;height:40%;pointer-events:none}
+.puff span{position:absolute;bottom:0;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.9);filter:blur(8px);opacity:0;animation:puff 5.5s ease-out infinite}
+.puff span:nth-child(1){left:5%}.puff span:nth-child(2){left:38%;animation-delay:.1s}.puff span:nth-child(3){left:70%;animation-delay:.2s}
+.steam{position:absolute;z-index:3;left:20%;top:-34%;width:60%;height:40%;pointer-events:none}
 .steam span{position:absolute;bottom:0;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(6px);animation:rise 4.5s ease-out infinite;opacity:0}
 .steam span:nth-child(1){left:20%}
 .steam span:nth-child(2){left:50%;animation-delay:1.5s}
@@ -101,7 +101,7 @@ section{padding:64px 0}
 .art span{display:block;font-weight:600;color:var(--muted);font-size:15px;margin-top:6px}
 
 /* houses */
-.houses{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.houses{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
 .house{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:12px;transition:transform .25s,box-shadow .25s}
 .house:hover{transform:translateY(-4px);box-shadow:0 18px 40px -26px rgba(58,31,31,.5)}
 .house .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -111,9 +111,10 @@ section{padding:64px 0}
 .badge.full{background:#e7dcd8;color:#6b5a55}
 .bar{height:8px;border-radius:99px;background:#efe2d3;overflow:hidden}
 .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--wine));border-radius:99px;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
-.house dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:16px}
-.house dt{color:var(--muted)}
-.house dd{margin:0;font-weight:600}
+.house .hart{width:62%;margin:-6px auto 0;aspect-ratio:1;object-fit:contain;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.house:hover .hart{transform:translateY(-6px) rotate(-3deg) scale(1.04)}
+.house .desc{margin:0;font-size:16.5px;line-height:1.55}
+.house .addr{margin:0;font-size:15px;color:var(--muted);font-weight:600}
 .house .pick{margin-top:auto;align-self:flex-start;padding:10px 20px;font-size:16px}
 .house.is-full{opacity:.7}
 .foodline{display:flex;flex-wrap:wrap;gap:6px}
@@ -134,12 +135,15 @@ dialog.reg[open]{display:flex;flex-direction:column;animation:pop .35s cubic-bez
 .reg-body{padding:20px 24px 24px;overflow:auto}
 .pane{display:none}.pane.on{display:block;animation:fadein .35s ease}
 .pane > p.sub{margin:0 0 14px;color:var(--muted)}
-.hopts{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.hopts{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
 .hopt{text-align:right;font:inherit;color:inherit;background:#fff;border:2px solid var(--line);border-radius:18px;padding:16px;cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:border-color .2s,transform .2s,box-shadow .2s}
 .hopt:hover:not(:disabled){border-color:var(--wine);transform:translateY(-2px);box-shadow:0 12px 24px -16px rgba(140,47,58,.6)}
 .hopt:disabled{opacity:.5;cursor:not-allowed}
-.hopt b{font-family:var(--serif);font-size:24px;color:var(--wine-d)}
-.hopt small{color:var(--muted);font-size:14px}
+.hopt b{font-family:var(--serif);font-size:22px;color:var(--wine-d);display:block;line-height:1.2}
+.hopt small{color:var(--muted);font-size:13.5px;display:block}
+.hopt .hrow{display:flex;gap:10px;align-items:center}
+.hopt .hrow img{width:56px;height:56px;object-fit:contain;flex:none}
+.hopt .badge{align-self:flex-start}
 .chosen{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fbefe6;border-radius:14px;padding:10px 14px;margin-bottom:18px;font-weight:700}
 .linkbtn{background:none;border:0;color:var(--wine);font:700 15px var(--sans);cursor:pointer;text-decoration:underline}
 label{display:block;font-weight:700;margin:0 0 6px}
@@ -163,6 +167,7 @@ input:focus{outline:none;border-color:var(--wine);box-shadow:0 0 0 4px rgba(140,
 .thanks img{width:150px;margin:0 auto 6px}
 .thanks h3{font-size:34px;color:var(--wine-d);margin-bottom:8px}
 .cta-band{text-align:center;background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:40px 24px}
+.cta-band .umb{width:120px;margin:-10px auto 6px;animation:bob 5s ease-in-out infinite}
 .cta-band h2{font-size:clamp(28px,4.2vw,42px);color:var(--wine-d);margin-bottom:8px}
 .cta-band p{color:var(--muted);margin:0 0 22px}
 .community{display:flex;justify-content:center;margin-bottom:14px}
@@ -180,8 +185,8 @@ footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:15px}
 @keyframes glow{0%,100%{opacity:.45}50%{opacity:1}}
 @keyframes flicker{0%,100%{opacity:.85}40%{opacity:1}60%{opacity:.7}}
 @keyframes simmer{0%,100%{transform:scale(1,1)}50%{transform:scale(1.012,.99)}}
-@keyframes lid{0%,62%,100%{transform:none}66%{transform:translateY(-9%) rotate(-5deg)}70%{transform:translateY(-1%) rotate(1deg)}73%{transform:translateY(-6%) rotate(-3deg)}77%{transform:none}80%{transform:translateY(-2%) rotate(-1deg)}83%{transform:none}}
-@keyframes puff{0%,64%{opacity:0;transform:translateY(0) scale(.6)}68%{opacity:.95}100%{opacity:0;transform:translateY(-120%) scale(2.6)}}
+@keyframes lid{0%,54%,100%{transform:none}57%{transform:translateY(-4%) rotate(-2deg)}59%{transform:none}62%{transform:translateY(-6%) rotate(2deg)}64%{transform:none}70%{transform:translateY(-62%) rotate(-11deg)}80%{transform:translateY(-58%) rotate(-9deg)}86%{transform:translateY(2%) rotate(1deg)}89%{transform:translateY(-6%)}92%{transform:none}}
+@keyframes puff{0%,64%{opacity:0;transform:translateY(0) scale(.6)}70%{opacity:.95}95%,100%{opacity:0;transform:translateY(-140%) scale(2.8)}}
 @keyframes bubble{0%{opacity:0;transform:translateY(0) scale(.5)}20%{opacity:1}90%{opacity:1;transform:translateY(-140%) scale(1)}100%{opacity:0;transform:translateY(-150%) scale(1.5)}}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @keyframes beat{0%,100%{transform:scale(1)}12%{transform:scale(1.18)}24%{transform:scale(1)}}
@@ -208,9 +213,9 @@ footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:15px}
   <header class="hero">
     <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow">ערב נשים בבתים · תל אביב</div>
-        <h1><span class="soft">כשמתחיל להתקרר בתל אביב</span>אצלנו מתבשל משהו חם <span class="heart">♥</span></h1>
-        <p class="lead">5 בתים, עד 15 נרשמות בכל בית. בכל בית נפגש לערב חוויתי ומחבר, לסדנה מיוחדת וארוחת ערב.</p>
+        <div class="eyebrow">ערב נשים · כסלו תשפ״ז</div>
+        <h1>משהו חם<br>מתבשל פה! <span class="heart">♥</span></h1>
+        <p class="lead">ערב אחד של 5 בתים מארחים. 5 סדנאות שוות וקהילה אחת של נשות מעלה אליהו.<br><b style="color:var(--wine-d)">לך נשאר רק לבחור!</b></p>
         <div class="chips">
           <span class="chip">יום <b>שני</b> · ו׳ כסלו</span>
           <span class="chip"><b>16.11</b></span>
@@ -231,11 +236,10 @@ footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:15px}
         <div class="ledge"></div>
         <div class="pot">
           <div class="shadow"></div>
-          <div class="bubbles"><i></i><i></i><i></i></div>
-          <img src="img/pot.webp" alt="">
-          <img class="lid" src="img/pot-lid.webp" alt="">
-          <div class="steam"><span></span><span></span><span></span></div>
           <div class="puff"><span></span><span></span><span></span></div>
+          <img class="body" src="img/pot-open.webp" alt="">
+          <img class="lid" src="img/lid.webp" alt="">
+          <div class="steam"><span></span><span></span><span></span></div>
         </div>
       </div>
     </div>
@@ -245,22 +249,16 @@ footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:15px}
     <div class="wrap">
       <div class="sec-head reveal"><div><h2>איך זה עובד</h2><p>שלושה צעדים, וערב חם אחד.</p></div></div>
       <div class="steps">
-        <div class="step reveal"><div class="n">1</div><h3>בוחרות בית</h3><p>לכל בית סדנה וארוחת ערב משלו.</p></div>
-        <div class="step reveal"><div class="n">2</div><h3>נרשמות</h3><p>עד 15 נרשמות בכל בית, אז כדאי למהר.</p></div>
-        <div class="step reveal"><div class="n">3</div><h3>מגיעות</h3><p>מקבלות אישור והכתובת לפני הערב.</p></div>
-      </div>
-      <div class="art-band">
-        <div class="art reveal"><img src="img/house.webp" alt="" loading="lazy" onerror="this.parentElement.remove()"><span>בית חם</span></div>
-        <div class="art reveal"><img src="img/candle.webp" alt="" loading="lazy" onerror="this.parentElement.remove()"><span>סדנה מיוחדת</span></div>
-        <div class="art reveal"><img src="img/pot.webp" alt="" loading="lazy" onerror="this.parentElement.remove()"><span>ארוחת ערב</span></div>
-        <div class="art reveal"><img src="img/mug.webp" alt="" loading="lazy" onerror="this.parentElement.remove()"><span>חברות</span></div>
+        <div class="step reveal"><div class="n">1</div><h3>בוחרות סדנה</h3><p>5 בתים מארחים, 5 סדנאות שוות.</p></div>
+        <div class="step reveal"><div class="n">2</div><h3>נרשמות</h3><p>עד 15 משתתפות בכל בית, אז כדאי למהר.</p></div>
+        <div class="step reveal"><div class="n">3</div><h3>מגיעות</h3><p>לערב חם אחד של קהילה אחת.</p></div>
       </div>
     </div>
   </section>
 
   <section id="houses">
     <div class="wrap">
-      <div class="sec-head reveal"><div><h2>חמשת הבתים</h2><p>המקומות מתעדכנים בזמן אמת.</p></div></div>
+      <div class="sec-head reveal"><div><h2>5 בתים, 5 סדנאות</h2><p>לך נשאר רק לבחור! המקומות מתעדכנים בזמן אמת.</p></div></div>
       <div class="houses" id="houseGrid"></div>
       <p class="hint reveal" style="margin-top:18px">שעת התחלה: 19:58 · עלות: [להשלמה]</p>
     </div>
@@ -269,8 +267,9 @@ footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:15px}
   <section id="register">
     <div class="wrap">
       <div class="cta-band reveal">
-        <h2>שומרות לך מקום ליד השולחן</h2>
-        <p>בוחרות בית, משאירות פרטים, ואם בא לך – משתבצות להביא משהו קטן לארוחה.</p>
+        <img class="umb" src="img/umbrella.webp" alt="" loading="lazy" onerror="this.remove()">
+        <h2>שומרות לך מקום</h2>
+        <p>בוחרות סדנה, משאירות פרטים, ואם בא לך – משתבצות להביא משהו קטן לשולחן.</p>
         <button class="btn" type="button" data-open-reg>להרשמה <span aria-hidden="true">←</span></button>
       </div>
     </div>
@@ -279,25 +278,25 @@ footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:15px}
 
 <footer>
   <div class="community" id="community" hidden><img src="img/community.png" alt="סמל הקהילה" onload="this.parentElement.hidden=false" onerror="this.parentElement.remove()"></div>
-  ערב נשים בבתים · שני, ו׳ כסלו · 16.11 · 19:58
+  ערב נשים · כסלו תשפ״ז · שני, ו׳ כסלו · 16.11 · 19:58
 </footer>
 
 <dialog class="reg" id="reg" aria-labelledby="regTitle">
   <div class="reg-head"><h2 id="regTitle">הרשמה לערב</h2><button class="x" type="button" data-close aria-label="סגירה">×</button></div>
-  <ol class="stepper" aria-hidden="true"><li data-s="1">1 · בחירת בית</li><li data-s="2">2 · פרטים ושיבוץ</li><li data-s="3">3 · סיום</li></ol>
+  <ol class="stepper" aria-hidden="true"><li data-s="1">1 · בחירת סדנה</li><li data-s="2">2 · פרטים ושיבוץ</li><li data-s="3">3 · סיום</li></ol>
   <div class="reg-body">
     <div class="pane" data-pane="1">
-      <p class="sub">באיזה בית תרצי להיות? המקומות מתעדכנים בזמן אמת.</p>
+      <p class="sub">לאיזו סדנה תרצי להצטרף? המקומות מתעדכנים בזמן אמת.</p>
       <div class="hopts" id="hopts"></div>
     </div>
     <form class="pane" data-pane="2" id="form" novalidate>
-      <div class="chosen"><span id="chosenName"></span><button class="linkbtn" type="button" data-go="1">החלפת בית</button></div>
+      <div class="chosen"><span id="chosenName"></span><button class="linkbtn" type="button" data-go="1">החלפת סדנה</button></div>
       <div class="two">
         <div class="field"><label for="name">שם מלא</label><input id="name" name="name" type="text" autocomplete="name" required maxlength="80"></div>
         <div class="field"><label for="phone">טלפון</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="050-0000000" dir="ltr" style="text-align:right"></div>
       </div>
       <div class="field">
-        <label>רוצה להביא משהו לארוחה? <span style="font-weight:400;color:var(--muted)">(לא חובה)</span></label>
+        <label>רוצה להביא משהו לשולחן? <span style="font-weight:400;color:var(--muted)">(לא חובה)</span></label>
         <div class="slots" id="slots"></div>
         <div class="hint">כל משבצת נלקחת על ידי נרשמת אחת בלבד. משבצת תפוסה מסומנת ולא ניתנת לבחירה.</div>
       </div>
@@ -311,7 +310,7 @@ footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:15px}
       <img src="img/mug.webp" alt="">
       <h3 id="thxTitle">תודה!</h3>
       <p id="thxText"></p>
-      <p>ניצור קשר עם הכתובת והפרטים לפני הערב.</p>
+      <p>מחכות לך!</p>
       <button class="btn" type="button" data-close>סגירה</button>
     </div>
   </div>
@@ -322,14 +321,14 @@ const API = 'https://script.google.com/macros/s/AKfycbx6tIgC_ItYb4X-zf6QgUGeSkQc
 
 // Details per house – fill in when known
 const DETAILS = {
-  '1': { activity: '[להשלמה]', address: '[להשלמה]', dinner: '[להשלמה]' },
-  '2': { activity: '[להשלמה]', address: '[להשלמה]', dinner: '[להשלמה]' },
-  '3': { activity: '[להשלמה]', address: '[להשלמה]', dinner: '[להשלמה]' },
-  '4': { activity: '[להשלמה]', address: '[להשלמה]', dinner: '[להשלמה]' },
-  '5': { activity: '[להשלמה]', address: '[להשלמה]', dinner: '[להשלמה]' },
+  '1': { name: 'מאסטר שף', img: 'img/w-kubbeh.webp', desc: 'סדנת מעלה ריחות וטעם, כי הולכות לבשל ולאכול קובה עם מעין כץ!', address: 'דפנה 28 כניסה א, תל אביב' },
+  '2': { name: 'רק בבריאות', img: 'img/w-health.webp', desc: 'חיזוק פרקטי לחורף ובכלל. ידע ייחודי לחיים עם סדנה מעולה של כלים מרפואה משלימה לבית עם נורית הוכמן!', address: 'זימן 4, תל אביב' },
+  '3': { name: 'מלאכת מחשבת', img: 'img/w-macrame.webp', desc: 'תמיד תמיד רצית להכין מקרמה, והפעם ההזדמנות! בסדנה עם לאה ויסברט ואביטל בירנבאום.', address: 'דב פרידמן 7, רמת גן (אצל מוריה חפץ)' },
+  '4': { name: 'להראות בטוב', img: 'img/w-style.webp', desc: 'להרגיש טוב עם איך את נראית, במיוחד אחרי סדנת סטיילינג כיפית ופרקטית עם אביטל פישר!', address: 'זכרון יעקב 11, תל אביב' },
+  '5': { name: 'הנאה ביצירה', img: 'img/w-watercolor.webp', desc: 'זמן ייחודי של התמסרות למרחב היצירה באמנות צבעי המים עם אפרת שפירא!', address: 'דפנה 32 כניסה ג, תל אביב (אצל חנה מויאל)' },
 };
 // Fallback so the page renders before data arrives
-const FALLBACK = { capacity: 15, houses: ['א','ב','ג','ד','ה'].map((l,i)=>({ id:String(i+1), name:`בית ${l}׳`, remaining:null, slots:[
+const FALLBACK = { capacity: 15, houses: ['1','2','3','4','5'].map(id=>({ id, name: DETAILS[id].name, remaining:null, slots:[
   {id:'soup',name:'מרק',remaining:2},{id:'dessert',name:'קינוח',remaining:2},{id:'cracker',name:'חבילת קרקרים',remaining:2},{id:'cheese',name:'גבינה',remaining:2},{id:'veggies',name:'מגש ירקות חתוכים',remaining:1}]})) };
 
 let STATE = FALLBACK;
@@ -349,11 +348,12 @@ function renderHouses(){
     const full = h.remaining !== null && h.remaining <= 0;
     const pct = h.remaining === null ? 0 : Math.round(100 * (cap - h.remaining) / cap);
     return `<article class="house reveal in ${full ? 'is-full' : ''}" data-house-id="${h.id}">
-      <div class="top"><h3>${h.name}</h3>${badge(h)}</div>
+      <img class="hart" src="${d.img}" alt="" loading="lazy" onerror="this.remove()">
+      <div class="top"><h3>${d.name}</h3>${badge(h)}</div>
       <div class="bar" aria-hidden="true"><i style="width:${pct}%"></i></div>
-      <dl><dt>פעילות</dt><dd>${d.activity}</dd><dt>כתובת</dt><dd>${d.address}</dd><dt>ארוחת ערב</dt><dd>${d.dinner}</dd></dl>
-      <div class="foodline" title="משבצות אוכל">${foodLine(h)}</div>
-      <button class="btn pick" type="button" data-open-reg="${h.id}" ${full ? 'disabled' : ''}>${full ? 'הבית מלא' : 'להרשמה לבית זה'}</button>
+      <p class="desc">${d.desc}</p>
+      <p class="addr"><span aria-hidden="true">📍</span> ${d.address}</p>
+      <button class="btn pick" type="button" data-open-reg="${h.id}" ${full ? 'disabled' : ''}>${full ? 'הבית מלא' : 'להרשמה לסדנה'}</button>
     </article>`;
   }).join('');
 }
@@ -363,11 +363,10 @@ function renderOptions(){
   $('#hopts').innerHTML = STATE.houses.map(h => {
     const full = h.remaining !== null && h.remaining <= 0;
     const pct = h.remaining === null ? 0 : Math.round(100 * (cap - h.remaining) / cap);
-    const act = (DETAILS[h.id] || {}).activity;
+    const d = DETAILS[h.id];
     return `<button type="button" class="hopt" data-choose="${h.id}" ${full ? 'disabled' : ''}>
-      <span style="display:flex;justify-content:space-between;align-items:center;gap:8px"><b>${h.name}</b>${badge(h)}</span>
-      <span class="bar"><i style="width:${pct}%"></i></span>
-      <small>פעילות: ${act}</small></button>`;
+      <span class="hrow"><img src="${d.img}" alt="" onerror="this.remove()"><span><b>${d.name}</b><small>${d.address}</small></span></span>
+      ${badge(h)}<span class="bar"><i style="width:${pct}%"></i></span></button>`;
   }).join('');
 }
 const TOTAL = { soup: 2, dessert: 2, cracker: 2, cheese: 2, veggies: 1 };
@@ -383,7 +382,7 @@ function renderSlots(){
   const prev = (document.querySelector('input[name=slot]:checked') || {}).value || '';
   if (!id) return;
   const h = STATE.houses.find(x => x.id === id);
-  $('#chosenName').textContent = `${h.name} · ${h.remaining === null ? '' : h.remaining <= 0 ? 'הבית מלא' : `נותרו ${h.remaining} מקומות`}`;
+  $('#chosenName').textContent = `${DETAILS[h.id].name} · ${h.remaining === null ? '' : h.remaining <= 0 ? 'הבית מלא' : `נותרו ${h.remaining} מקומות`}`;
   box.innerHTML = `<label><input type="radio" name="slot" value="" data-label="">לא מביאה כלום</label>` +
     units(h).map(u => `<label><input type="radio" name="slot" value="${u.key}" data-label="${u.label}" ${u.taken ? 'disabled' : ''}>${u.label}${u.taken ? ' (תפוסה)' : ''}</label>`).join('');
   const keep = prev && box.querySelector(`input[value="${prev}"]:not([disabled])`);
@@ -441,7 +440,7 @@ $('#form').addEventListener('submit', async e => {
     if (!j.ok) { if (j.error === 'house_full') go(1); throw new Error(j.error || 'server_error'); }
     const h = STATE.houses.find(x => x.id === house);
     $('#thxTitle').textContent = `תודה, ${name}!`;
-    $('#thxText').textContent = `נרשמת ל${h.name}, ערב ה-16.11 בשעה 19:58.` + (slotLabel ? ` משבצת האוכל שלך: ${slotLabel}.` : '');
+    $('#thxText').textContent = `נרשמת לסדנת "${DETAILS[h.id].name}" – ${DETAILS[h.id].address}. ערב ה-16.11 בשעה 19:58.` + (slotLabel ? ` משבצת האוכל שלך: ${slotLabel}.` : '');
     go(3);
     burst();
   } catch (err) {
