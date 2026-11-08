@@ -139,7 +139,7 @@ dialog.reg[open]{display:flex;flex-direction:column;animation:pop .35s cubic-bez
 .reg-body{padding:20px 24px 24px;overflow:auto}
 .pane{display:none}.pane.on{display:block;animation:fadein .35s ease}
 .pane > p.sub{margin:0 0 14px;color:var(--muted)}
-.hopts{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.hopts{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
 .hopt{text-align:right;font:inherit;color:inherit;background:#fff;border:2px solid var(--line);border-radius:18px;padding:16px;cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:border-color .2s,transform .2s,box-shadow .2s}
 .hopt:hover:not(:disabled){border-color:var(--wine);transform:translateY(-2px);box-shadow:0 12px 24px -16px rgba(140,47,58,.6)}
 .hopt:disabled{opacity:.5;cursor:not-allowed}
@@ -147,7 +147,12 @@ dialog.reg[open]{display:flex;flex-direction:column;animation:pop .35s cubic-bez
 .hopt small{color:var(--muted);font-size:13.5px;display:block}
 .hopt .hrow{display:flex;gap:10px;align-items:center}
 .hopt .hrow img{width:56px;height:56px;object-fit:contain;flex:none}
-.hopt .badge{align-self:flex-start}
+.hopt .hdesc{font-size:15px;line-height:1.5;color:var(--ink)}
+.hopt .hfoot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto}
+.hopt .pickme{font-weight:700;font-size:14px;color:var(--wine);opacity:.75;transition:opacity .2s,transform .2s}
+.hopt:hover:not(:disabled) .pickme{opacity:1;transform:translateX(-3px)}
+.hopt:disabled .pickme{display:none}
+.hopt .hrow img{width:64px;height:64px}
 .chosen{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fbefe6;border-radius:14px;padding:10px 14px;margin-bottom:18px;font-weight:700}
 .linkbtn{background:none;border:0;color:var(--wine);font:700 15px var(--sans);cursor:pointer;text-decoration:underline}
 label{display:block;font-weight:700;margin:0 0 6px}
@@ -302,7 +307,7 @@ addEventListener('pageshow', e => { if (e.persisted) window.scrollTo(0, 0); });
   <ol class="stepper" aria-hidden="true"><li data-s="1">1 · בחירת סדנה</li><li data-s="2">2 · פרטים ושיבוץ</li><li data-s="3">3 · סיום</li></ol>
   <div class="reg-body">
     <div class="pane" data-pane="1">
-      <p class="sub">לאיזו סדנה תרצי להצטרף? המקומות מתעדכנים בזמן אמת.</p>
+      <p class="sub">5 בתים מארחים, 5 סדנאות שוות – לך נשאר רק לבחור! המקומות מתעדכנים בזמן אמת.</p>
       <div class="hopts" id="hopts"></div>
     </div>
     <form class="pane" data-pane="2" id="form" novalidate>
@@ -381,8 +386,10 @@ function renderOptions(){
     const pct = h.remaining === null ? 0 : Math.round(100 * (cap - h.remaining) / cap);
     const d = DETAILS[h.id];
     return `<button type="button" class="hopt" data-choose="${h.id}" ${full ? 'disabled' : ''}>
-      <span class="hrow"><img src="${d.img}" alt="" onerror="this.remove()"><span><b>${d.name}</b><small>${d.address}</small></span></span>
-      ${badge(h)}<span class="bar"><i style="width:${pct}%"></i></span></button>`;
+      <span class="hrow"><img src="${d.img}" alt="" onerror="this.remove()"><span><b>${d.name}</b><small>📍 ${d.address}</small></span></span>
+      <span class="hdesc">${d.desc}</span>
+      <span class="hfoot">${badge(h)}<span class="pickme">לבחירה ←</span></span>
+      <span class="bar"><i style="width:${pct}%"></i></span></button>`;
   }).join('');
 }
 const TOTAL = { soup: 2, dessert: 2, cracker: 2, cheese: 2, veggies: 1, milk: 1 };
