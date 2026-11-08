@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#f8efe4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700&family=Playpen+Sans+Hebrew:wght@800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f8efe4; --paper:#fffaf3; --ink:#3a1f1f; --muted:#7a5c55;
@@ -69,7 +69,7 @@ main,header,footer{position:relative;z-index:1}
 .pot{container-type:inline-size}
 .brand{position:absolute;z-index:1;left:51.5%;top:47%;width:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2cqw;pointer-events:none}
 .brand img{width:34%;filter:drop-shadow(0 .4cqw .3cqw rgba(40,10,15,.45)) drop-shadow(0 -.2cqw 0 rgba(255,235,190,.25))}
-.brand span{font-family:'Fredoka',var(--sans);font-weight:600;font-size:8.4cqw;line-height:1.05;letter-spacing:.01em;text-align:center;white-space:nowrap;background:linear-gradient(180deg,#f0dc9c,#c9a957 60%,#b08e3e);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 .35cqw .25cqw rgba(40,10,15,.5))}
+.brand span{font-family:'Playpen Sans Hebrew',var(--sans);font-weight:800;font-size:8.2cqw;line-height:1.08;text-align:center;white-space:nowrap;background:linear-gradient(180deg,#f0dc9c,#c9a957 60%,#b08e3e);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 .35cqw .25cqw rgba(40,10,15,.5))}
 .pot .lid{position:absolute;width:79%;left:11.5%;top:-21%;animation:lid 6s cubic-bezier(.3,.7,.4,1) infinite;transform-origin:50% 90%;z-index:2}
 .pot .shadow{position:absolute;left:10%;right:10%;bottom:-3%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(58,31,31,.32),transparent);z-index:-1}
 .puff{position:absolute;z-index:1;left:25%;top:-8%;width:50%;height:40%;pointer-events:none}
@@ -174,7 +174,7 @@ input:focus{outline:none;border-color:var(--wine);box-shadow:0 0 0 4px rgba(140,
 .cta-band .umb{width:120px;margin:-10px auto 6px;animation:bob 5s ease-in-out infinite}
 .cta-band h2{font-size:clamp(28px,4.2vw,42px);color:var(--wine-d);margin-bottom:8px}
 .cta-band p{color:var(--muted);margin:0 0 22px}
-.community{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:14px;font-family:'Fredoka',var(--sans);font-weight:600;font-size:22px;color:var(--wine-d)}
+.community{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:14px;font-family:'Playpen Sans Hebrew',var(--sans);font-weight:800;font-size:22px;color:var(--wine-d)}
 .community img{height:48px;width:auto}
 @keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
 @keyframes fadein{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
@@ -253,7 +253,7 @@ addEventListener('pageshow', e => { if (e.persisted) window.scrollTo(0, 0); });
           <div class="shadow"></div>
           <div class="puff"><span></span><span></span><span></span></div>
           <img class="body" src="img/pot-open.webp" alt="">
-          <div class="brand" aria-label="קהילת מעלה אליהו"><img src="img/community.svg" alt=""><span>קהילת<br>מעלה אליהו</span></div>
+          <div class="brand" aria-label="נשות מעלה אליהו"><img src="img/community.svg" alt=""><span>נשות<br>מעלה אליהו</span></div>
           <img class="lid" src="img/lid.webp" alt="">
           <div class="steam"><span></span><span></span><span></span></div>
         </div>
@@ -293,7 +293,7 @@ addEventListener('pageshow', e => { if (e.persisted) window.scrollTo(0, 0); });
 </main>
 
 <footer>
-  <div class="community"><img src="img/community.svg" alt=""><span>קהילת מעלה אליהו</span></div>
+  <div class="community"><img src="img/community.svg" alt=""><span>נשות מעלה אליהו</span></div>
   ערב נשים · כסלו תשפ״ז · שני, ו׳ כסלו · 16.11 · 19:58
 </footer>
 
