@@ -16,13 +16,14 @@ const HOUSES = [
   { id: '5', name: 'הנאה ביצירה' },
 ];
 
-// משבצות אוכל לכל בית (סה"כ 9)
+// משבצות אוכל לכל בית (סה"כ 10), כל משבצת נלקחת פעם אחת
 const SLOTS = [
-  { id: 'soup',    name: 'מרק',               count: 2 },
-  { id: 'dessert', name: 'קינוח',             count: 2 },
-  { id: 'cracker', name: 'חבילת קרקרים',      count: 2 },
-  { id: 'cheese',  name: 'גבינה',             count: 2 },
-  { id: 'veggies', name: 'מגש ירקות חתוכים',  count: 1 },
+  { id: 'soup',    name: 'מרק',                 count: 2 },
+  { id: 'dessert', name: 'משהו מתוק ליד הקפה',  count: 2, aliases: ['קינוח'] },
+  { id: 'cracker', name: 'חבילת קרקרים',        count: 2 },
+  { id: 'cheese',  name: 'גבינה',               count: 2 },
+  { id: 'veggies', name: 'מגש ירקות חתוכים',    count: 1 },
+  { id: 'milk',    name: 'חלב',                 count: 1 },
 ];
 
 const SHEET_NAME = 'הרשמות';
@@ -76,7 +77,7 @@ function readState_() {
     if (!h) return;
     h.registered++;
     h.phones[normPhone_(row[2])] = true;
-    const slot = SLOTS.find(s => s.name === row[4]);
+    const slot = SLOTS.find(s => s.name === row[4] || (s.aliases || []).includes(row[4]));
     if (slot) h.slots[slot.id].remaining--;
   });
   return state;
