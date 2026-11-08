@@ -191,6 +191,8 @@ input:focus{outline:none;border-color:var(--wine);box-shadow:0 0 0 4px rgba(140,
 .eq i{flex:1;background:var(--wine);border-radius:2px;height:30%;transition:height .3s}
 .music.on .eq i{animation:eq 1s ease-in-out infinite}
 .music.on .eq i:nth-child(2){animation-delay:-.4s}.music.on .eq i:nth-child(3){animation-delay:-.7s}
+@keyframes hint{0%,100%{box-shadow:0 10px 26px -12px rgba(58,31,31,.45),0 0 0 1px var(--line),0 0 0 0 rgba(140,47,58,.35)}50%{box-shadow:0 10px 26px -12px rgba(58,31,31,.45),0 0 0 1px var(--line),0 0 0 10px rgba(140,47,58,0)}}
+.music.hint{animation:hint 1.8s ease-out infinite}
 @keyframes eq{0%,100%{height:25%}50%{height:100%}}
 .music .lbl{white-space:nowrap}
 .credit-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
@@ -611,10 +613,20 @@ function burst(){
   const a = $('#bgm'), b = $('#music'); const TARGET = .32; let fade;
   let muted = false; try { muted = localStorage.getItem('bgm') === 'off'; } catch (e) {}
   function ramp(to, done){ clearInterval(fade); fade = setInterval(() => { const d = to - a.volume; if (Math.abs(d) < .02) { a.volume = to; clearInterval(fade); done && done(); } else a.volume += d * .15; }, 60); }
-  function play(){ a.volume = 0; a.play().then(() => { b.classList.add('on'); b.setAttribute('aria-pressed', 'true'); ramp(TARGET); }).catch(() => {}); }
+  function play(){ a.volume = 0; a.play().then(() => { b.classList.add('on'); b.classList.remove('hint'); b.setAttribute('aria-pressed', 'true'); ramp(TARGET); }).catch(() => {}); }
   function stop(){ ramp(0, () => a.pause()); b.classList.remove('on'); b.setAttribute('aria-pressed', 'false'); }
   b.addEventListener('click', e => { e.stopPropagation(); if (b.classList.contains('on')) { stop(); try { localStorage.setItem('bgm', 'off'); } catch (e) {} } else { play(); try { localStorage.removeItem('bgm'); } catch (e) {} } });
-  if (!muted) { const first = () => { removeEventListener('pointerdown', first, true); if (!b.classList.contains('on')) play(); }; addEventListener('pointerdown', first, true); }
+  if (!muted) {
+    // 1) try right away (works when the browser allows autoplay)
+    a.preload = 'auto';
+    const tryNow = () => { if (!b.classList.contains('on')) play(); };
+    tryNow(); addEventListener('load', tryNow); setTimeout(tryNow, 800);
+    // 2) otherwise start on the very first interaction of any kind
+    const EV = ['pointerdown', 'touchend', 'click', 'keydown', 'mousedown'];
+    const first = () => { if (b.classList.contains('on')) { EV.forEach(t => removeEventListener(t, first, true)); return; } play(); };
+    EV.forEach(t => addEventListener(t, first, { capture: true, passive: true }));
+    b.classList.add('hint');
+  }
   document.addEventListener('visibilitychange', () => { if (document.hidden && !a.paused) a.pause(); else if (!document.hidden && b.classList.contains('on')) a.play().catch(() => {}); });
 })();
 
