@@ -20,7 +20,7 @@
   --serif:'Frank Ruhl Libre',serif; --sans:'Assistant',system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:auto}
+html{scroll-behavior:auto;overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:var(--wine)}
@@ -66,6 +66,10 @@ main,header,footer{position:relative;z-index:1}
 .ledge{position:absolute;left:-6%;right:-6%;bottom:11%;height:16px;border-radius:10px;background:linear-gradient(#fffaf3,#efe0cf);box-shadow:0 10px 20px -12px rgba(58,31,31,.4);z-index:2}
 .pot{position:absolute;z-index:3;left:2%;bottom:5%;width:42%;aspect-ratio:640/474;animation:simmer 3.2s ease-in-out infinite;transform-origin:50% 100%}
 .pot .body{position:absolute;inset:0;width:100%;height:100%}
+.pot{container-type:inline-size}
+.brand{position:absolute;z-index:1;left:51.5%;top:47%;width:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2cqw;pointer-events:none}
+.brand img{width:34%;filter:drop-shadow(0 .4cqw .3cqw rgba(40,10,15,.45)) drop-shadow(0 -.2cqw 0 rgba(255,235,190,.25))}
+.brand span{font-family:var(--serif);font-weight:900;font-size:8.2cqw;line-height:1.02;text-align:center;white-space:nowrap;background:linear-gradient(180deg,#f0dc9c,#c9a957 60%,#b08e3e);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 .35cqw .25cqw rgba(40,10,15,.5))}
 .pot .lid{position:absolute;width:79%;left:11.5%;top:-21%;animation:lid 6s cubic-bezier(.3,.7,.4,1) infinite;transform-origin:50% 90%;z-index:2}
 .pot .shadow{position:absolute;left:10%;right:10%;bottom:-3%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(58,31,31,.32),transparent);z-index:-1}
 .puff{position:absolute;z-index:1;left:25%;top:-8%;width:50%;height:40%;pointer-events:none}
@@ -170,8 +174,8 @@ input:focus{outline:none;border-color:var(--wine);box-shadow:0 0 0 4px rgba(140,
 .cta-band .umb{width:120px;margin:-10px auto 6px;animation:bob 5s ease-in-out infinite}
 .cta-band h2{font-size:clamp(28px,4.2vw,42px);color:var(--wine-d);margin-bottom:8px}
 .cta-band p{color:var(--muted);margin:0 0 22px}
-.community{display:flex;justify-content:center;margin-bottom:14px}
-.community img{height:64px;width:auto}
+.community{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:14px;font-family:var(--serif);font-weight:700;font-size:22px;color:var(--wine-d)}
+.community img{height:48px;width:auto}
 @keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
 @keyframes fadein{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
 
@@ -196,7 +200,9 @@ footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:15px}
   .hero-grid{grid-template-columns:1fr}
   .two{grid-template-columns:1fr}
   dialog.reg{border-radius:22px}
-  .win-wrap{max-width:330px;margin:0 auto;order:-1;width:100%}
+  .pot{width:48%;left:0}
+  .ledge{left:-3%;right:-3%}
+  .win-wrap{max-width:350px;margin:0 auto;order:-1;width:100%}
   .steps{grid-template-columns:1fr}
   .art-band{grid-template-columns:repeat(2,1fr)}
   .sec-head{display:block}
@@ -246,6 +252,7 @@ addEventListener('pageshow', e => { if (e.persisted) window.scrollTo(0, 0); });
           <div class="shadow"></div>
           <div class="puff"><span></span><span></span><span></span></div>
           <img class="body" src="img/pot-open.webp" alt="">
+          <div class="brand" aria-label="קהילת מעלה אליהו"><img src="img/community.svg" alt=""><span>קהילת<br>מעלה אליהו</span></div>
           <img class="lid" src="img/lid.webp" alt="">
           <div class="steam"><span></span><span></span><span></span></div>
         </div>
@@ -285,7 +292,7 @@ addEventListener('pageshow', e => { if (e.persisted) window.scrollTo(0, 0); });
 </main>
 
 <footer>
-  <div class="community" id="community" hidden><img src="img/community.png" alt="סמל הקהילה" onload="this.parentElement.hidden=false" onerror="this.parentElement.remove()"></div>
+  <div class="community"><img src="img/community.svg" alt=""><span>קהילת מעלה אליהו</span></div>
   ערב נשים · כסלו תשפ״ז · שני, ו׳ כסלו · 16.11 · 19:58
 </footer>
 

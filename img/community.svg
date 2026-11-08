@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="105 130 375 315" role="img" aria-label="קהילת מעלה אליהו">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9c27e"/><stop offset="1" stop-color="#bfa253"/></linearGradient>
+  </defs>
+  <g fill="url(#g)">
+    <!-- left tower -->
+    <path d="M180 162 L236 144 L266 152 L266 374 L180 374 Z"/>
+    <!-- middle tower -->
+    <path d="M276 178 L304 168 L336 176 L336 380 L276 380 Z"/>
+    <!-- right tower -->
+    <path d="M346 176 L398 158 L410 164 L410 374 L346 374 Z"/>
+    <!-- open book -->
+    <path d="M114 386 Q200 384 286 394 L292 408 L298 394 Q384 384 472 386 L472 420 Q384 418 300 426 L292 436 L284 426 Q200 418 114 420 Z"/>
+  </g>
+  <g fill="#f2e6c2" opacity=".85">
+    <rect x="206" y="152" width="5" height="222"/>
+    <rect x="296" y="171" width="4" height="209"/>
+    <rect x="384" y="163" width="4" height="211"/>
+  </g>
+  <path d="M292 408 L292 436" stroke="#f2e6c2" stroke-width="3" opacity=".8"/>
+</svg>
