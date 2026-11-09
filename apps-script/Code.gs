@@ -40,28 +40,6 @@ function getSheet_() {
   return sh;
 }
 
-/** הרצה ידנית פעם אחת: מסדר כותרות, מקפיא שורה ראשונה, ומוסיף לשונית סיכום. */
-function setup() {
-  const sh = getSheet_();
-  sh.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
-  sh.setFrozenRows(1);
-  sh.setRightToLeft(true);
-  sh.getRange('C:C').setNumberFormat('@'); // טלפון כטקסט, שלא יאבד 0 מוביל
-
-  const ss = sh.getParent();
-  let sum = ss.getSheetByName('סיכום');
-  if (!sum) sum = ss.insertSheet('סיכום');
-  sum.clear();
-  sum.setRightToLeft(true);
-  const rows = [['בית', 'נרשמות', 'מקומות פנויים']];
-  HOUSES.forEach((h, i) => {
-    const r = i + 2;
-    rows.push([h.name, `=COUNTIF('${SHEET_NAME}'!D:D,A${r})`, `=${CAPACITY}-B${r}`]);
-  });
-  sum.getRange(1, 1, rows.length, 3).setValues(rows);
-  sum.getRange(1, 1, 1, 3).setFontWeight('bold');
-}
-
 function readState_() {
   const sh = getSheet_();
   const last = sh.getLastRow();
@@ -144,4 +122,98 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+/* ===== תצוגות מסודרות (לא נוגע בשורות ההרשמה) ===== */
+const HOUSE_COLORS = ['#f6d5c9', '#d9ead3', '#fce5cd', '#ead1dc', '#d0e0e3'];
+const WINE = '#8c2f3a';
+
+function setup() { buildViews(); }
+
+function buildViews() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const raw = getSheet_();
+  const R = "'" + SHEET_NAME + "'!";
+
+  // --- לשונית הנתונים: רק עיצוב, בלי לשנות ערכים ---
+  raw.setRightToLeft(true);
+  raw.setFrozenRows(1);
+  raw.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS])
+     .setFontWeight('bold').setBackground(WINE).setFontColor('#ffffff').setHorizontalAlignment('center');
+  raw.getRange('A2:A').setNumberFormat('dd/MM HH:mm');
+  raw.getRange('C2:C').setNumberFormat('@');
+  [120, 170, 120, 130, 170].forEach((w, i) => raw.setColumnWidth(i + 1, w));
+  raw.setTabColor('#999999');
+  const rules = HOUSES.map((h, i) => SpreadsheetApp.newConditionalFormatRule()
+      .whenFormulaSatisfied('=$D2="' + h.name + '"').setBackground(HOUSE_COLORS[i])
+      .setRanges([raw.getRange('A2:E1000')]).build());
+  raw.setConditionalFormatRules(rules);
+
+  // --- לשונית סיכום ---
+  let sum = ss.getSheetByName('סיכום') || ss.insertSheet('סיכום');
+  sum.clear(); sum.clearConditionalFormatRules(); sum.setRightToLeft(true);
+  const totalSlots = SLOTS.reduce((a, s) => a + s.count, 0);
+  const rows = [['בית / סדנה', 'נרשמו', 'נותרו מקומות', 'משבצות אוכל שנלקחו', 'מתוך']];
+  HOUSES.forEach((h, i) => {
+    const r = i + 2;
+    rows.push([h.name,
+      '=COUNTIF(' + R + 'D2:D,A' + r + ')',
+      '=' + CAPACITY + '-B' + r,
+      '=COUNTIFS(' + R + 'D2:D,A' + r + ',' + R + 'E2:E,"<>")',
+      totalSlots]);
+  });
+  rows.push(['סה״כ', '=SUM(B2:B6)', '=SUM(C2:C6)', '=SUM(D2:D6)', totalSlots * HOUSES.length]);
+  sum.getRange(1, 1, rows.length, 5).setValues(rows).setHorizontalAlignment('center').setFontSize(12);
+  sum.getRange(1, 1, 1, 5).setFontWeight('bold').setBackground(WINE).setFontColor('#ffffff');
+  sum.getRange(rows.length, 1, 1, 5).setFontWeight('bold').setBackground('#f3e7da');
+  HOUSES.forEach((h, i) => sum.getRange(i + 2, 1).setBackground(HOUSE_COLORS[i]).setFontWeight('bold'));
+  [170, 90, 110, 150, 70].forEach((w, i) => sum.setColumnWidth(i + 1, w));
+  sum.setFrozenRows(1); sum.setTabColor(WINE);
+  sum.getRange('A9').setValue('כל לשונית בית מתעדכנת אוטומטית מכל הרשמה חדשה. את הנתונים הגולמיים לא לערוך ידנית (לשונית "הרשמות").')
+     .setFontColor('#7a5c55').setFontStyle('italic');
+
+  // --- לשונית לכל בית ---
+  HOUSES.forEach((h, i) => {
+    let sh = ss.getSheetByName(h.name) || ss.insertSheet(h.name);
+    sh.clear(); sh.clearConditionalFormatRules(); sh.setRightToLeft(true); sh.setTabColor(HOUSE_COLORS[i]);
+    const q = '"' + h.name + '"';
+    sh.getRange('A1').setValue(h.name).setFontSize(18).setFontWeight('bold').setFontColor(WINE);
+    sh.getRange('A2').setFormula('="נרשמו "&COUNTIF(' + R + 'D2:D,' + q + ')&" מתוך ' + CAPACITY + ' · נותרו "&(' + CAPACITY + '-COUNTIF(' + R + 'D2:D,' + q + '))&" מקומות"')
+      .setFontSize(12).setFontColor('#5e1c26');
+    sh.getRange('A1:E1').merge().setHorizontalAlignment('right'); sh.getRange('A2:E2').merge().setHorizontalAlignment('right');
+    // רשימת נרשמות
+    sh.getRange('A4:E4').setValues([['#', 'שם מלא', 'טלפון', 'מביאה', 'נרשמה ב']])
+      .setFontWeight('bold').setBackground(WINE).setFontColor('#ffffff').setHorizontalAlignment('center');
+    sh.getRange('B5').setFormula('=IFERROR(SORT(FILTER({' + R + 'B2:B,' + R + 'C2:C,' + R + 'E2:E,' + R + 'A2:A},' + R + 'D2:D=' + q + '),4,TRUE),"עדיין אין נרשמות")');
+    sh.getRange('A5').setFormula('=ARRAYFORMULA(IF(B5:B19="","",IF(B5:B19="עדיין אין נרשמות","",ROW(B5:B19)-4)))');
+    sh.getRange('C5:C19').setNumberFormat('@');
+    sh.getRange('E5:E19').setNumberFormat('dd/MM HH:mm');
+    sh.getRange('A5:E19').setBackground('#fffaf3').setBorder(true, true, true, true, true, true, '#e6d6c6', SpreadsheetApp.BorderStyle.SOLID);
+    sh.getRange('A5:A19').setHorizontalAlignment('center').setFontColor('#7a5c55');
+    // מי מביאה מה
+    sh.getRange('G4:H4').setValues([['משבצת אוכל', 'מי מביאה']])
+      .setFontWeight('bold').setBackground(WINE).setFontColor('#ffffff').setHorizontalAlignment('center');
+    let r = 5;
+    SLOTS.forEach(s => {
+      const names = [s.name].concat(s.aliases || []);
+      const cond = names.map(n => '(' + R + 'E2:E="' + n + '")').join('+');
+      for (let k = 1; k <= s.count; k++) {
+        const label = s.count > 1 ? s.name + ' ' + k : s.name;
+        sh.getRange(r, 7).setValue(label);
+        sh.getRange(r, 8).setFormula('=IFERROR(INDEX(FILTER(' + R + 'B2:B,(' + R + 'D2:D=' + q + ')*((' + cond + ')*1>0)),' + k + '),"— פנוי —")');
+        r++;
+      }
+    });
+    sh.getRange(5, 7, r - 5, 2).setBackground('#fffaf3').setBorder(true, true, true, true, true, true, '#e6d6c6', SpreadsheetApp.BorderStyle.SOLID);
+    sh.setConditionalFormatRules([SpreadsheetApp.newConditionalFormatRule()
+      .whenTextEqualTo('— פנוי —').setFontColor('#b9a7a2').setItalic(true).setRanges([sh.getRange(5, 8, r - 5, 1)]).build()]);
+    [40, 170, 120, 170, 110, 24, 170, 150].forEach((w, c) => sh.setColumnWidth(c + 1, w));
+    sh.setFrozenRows(4);
+  });
+
+  // --- סדר הלשוניות: סיכום, 5 בתים, ובסוף הנתונים הגולמיים ---
+  const order = ['סיכום'].concat(HOUSES.map(h => h.name)).concat([SHEET_NAME]);
+  order.forEach((name, idx) => { const s = ss.getSheetByName(name); ss.setActiveSheet(s); ss.moveActiveSheet(idx + 1); });
+  ss.setActiveSheet(ss.getSheetByName('סיכום'));
+  Logger.log('VIEWS OK rows=' + (raw.getLastRow() - 1));
 }
